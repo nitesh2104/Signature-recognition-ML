@@ -1,5 +1,8 @@
 import  keras
 from sklearn.model_selection import  train_test_split
+import os
+from scipy import misc
+import scipy.misc  as mc
 
 TEST_DIR='E:/Python/signatue_recognition/data/test/'
 
@@ -44,11 +47,8 @@ def get_images(fish):
 
 
 def read_image(src):
-    import os
-    from scipy import misc
     filepath=src
     im=misc.imread(filepath)
-    import scipy.misc  as mc
      
     return mc.imresize(im,(ROWS,COLS))
 
@@ -87,7 +87,7 @@ y_all = np_utils.to_categorical(y_all)
 from sklearn.model_selection import train_test_split
 
 X_train, X_valid, y_train, y_valid = train_test_split(X_all, y_all, 
-                                                    test_size=14, random_state=23, 
+                                                    test_size=7, random_state=49, 
                                                     stratify=y_all)
 
 
@@ -96,7 +96,7 @@ optimizer = RMSprop(lr=1e-4)
 objective = 'categorical_crossentropy'
 def center_normalize(x):
     return (x - K.mean(x)) / K.std(x)
-print('1')
+
 model = Sequential()
 
 model.add(Activation(activation=center_normalize, input_shape=(ROWS, COLS, CHANNELS)))
